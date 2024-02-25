@@ -1,0 +1,68 @@
+<div *ngIf= "students;else err" class="form-container">
+   <div class="headers">
+       <h1>Student Management</h1>
+       <button class="btn add" (click)= "openForm()">Add Student</button>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Student Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Contact</th>
+                
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr *ngFor= "let student of students ">
+                <td>{{student['stuId']}}</td>
+                <td>{{student['name']}}</td>
+                <td>{{student['address']}}</td>
+                <td>{{student['contact']}}</td>
+                <td><button class="edit-button" (click)= "openForm(student)">Edit</button></td>
+                <td><button class="delete-button" (click)= "deleteStudent(student.stuId)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>   
+
+<ng-template #err >
+   <p class="p">Error Fetching Data</p> 
+</ng-template>
+
+
+<div class="form-wrapper" *ngIf= "showForm">
+    
+    <div class="student-form">
+
+        <h2 class="text-center text-info">{{formHeader}}</h2>
+
+        <div class="group">
+            <label for="">Student ID : </label>
+            <input type="text" class="formControl" [(ngModel)]= "stuId" name="stuId">
+        </div>
+
+        <div class="group">
+            <label for="">Name : </label>
+            <input type="text" class="formControl" [(ngModel)]= "name" name="name">
+        </div>
+
+        <div class="group">
+            <label for="">Address : </label>
+            <input type="text" class="formControl" [(ngModel)]= "address" name="address">
+        </div>
+
+        <div class="group">
+            <label for="">Contact : </label>
+            <input type="text" class="formControl" [(ngModel)]= "contact" name="contact">
+        </div>
+
+        <div class="action">
+            <button class= "btn btn-primary save" (click)= "saveStudent()">Save Changes</button>
+            <button class= "btn btn-danger cancel" (click)= "closeForm()">Cancel</button>
+        </div>
+
+    </div>
+
+</div>
+
